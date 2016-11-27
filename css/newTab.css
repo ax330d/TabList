@@ -1,0 +1,309 @@
+/**
+ * TabList CSS
+ */
+
+@font-face {
+    font-family: 'Symbola';
+    src: url("../fonts/Symbola.woff") format('woff');
+}
+
+body {
+    background-color: whitesmoke;
+    margin: 0px;
+}
+
+#footer a {
+    color: #bbb;
+}
+
+div.data-container {
+    background-color: #fefefe;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .05), 0 1px 4px 0 rgba(0, 0, 0, .08), 0 3px 1px -2px rgba(0, 0, 0, .2);
+    margin: 20px;
+    padding: 10px;
+    word-wrap: break-word;
+    display: flex;
+}
+
+div.favicon-container {
+    cursor: pointer;
+    padding: 5px;
+}
+
+div.text-container {
+    font-size: 1.1em;
+    line-height: 1.4em;
+    width: 100%;
+    padding: 5px;
+}
+
+div.options-container {
+    width: 24px;
+    text-align: center;
+    position: relative;
+}
+
+div.separator {
+    padding: 15px;
+    margin: 25px;
+    font-size: 1.4em;
+}
+
+div.options-container-cross {
+    font-size: 2.0em;
+    color: #999;
+    cursor: pointer;
+    top: -10px;
+    position: relative;
+    width: 24px;
+}
+
+div.options-container-reload {
+    font-size: 1.6em;
+    color: #999;
+    cursor: pointer;
+    font-family: Symbola;
+    transform: rotate(90deg);
+    position: absolute;
+    bottom: -4px;
+    width: 24px;
+}
+
+div.options-container-discard {
+    position: absolute;
+    top: -5px;
+    font-size: 1.6em;
+    color: #999;
+    font-weight: bold;
+    width: 24px;
+    right: 24px;
+    cursor: pointer;
+}
+
+div#footer {
+    font-size: 0.8em;
+    color: #bbb;
+    padding: 20px;
+    margin: 30px 0px 0px 0px;
+    text-align: center;
+}
+
+div#help {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.7);
+}
+
+div#help-container {
+    background-color: white;
+    position: fixed;
+    width: 500px;
+    top: 30%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -100px;
+    padding: 20px;
+    border-radius: 3px;
+    font-size: 1.2em;
+}
+
+div#help-close {
+    float: right;
+    top: -10px;
+    position: relative;
+    cursor: pointer;
+}
+
+div#bookmarks-container {
+    background-color: white;
+    border-bottom: 1px solid #D4E6F1;
+    display: inline-block;
+    width: 100%;
+}
+
+div#header {
+    background-color: steelblue;
+    color: white;
+    display: flex;
+    font-weight: 300;
+    font-size: 1.5em;
+    padding: 15px;
+    margin: 0px;
+}
+
+div#header-left {
+    font-weight: 300;
+    width: 80%;
+}
+
+div#header-right {
+    width: 20%;
+    float: right;
+    text-align: right;
+}
+
+span#thin {
+    font-weight: 100;
+}
+
+span#discard-sign {
+    font-size: 1.2em;
+    color: #999;
+}
+
+span#close-sign {
+    font-size: 1.4em;
+    color: #999;
+}
+
+span#reload-sign {
+    font-size: 1.1em;
+    color: #999;
+    font-family: Symbola;
+    transform: rotate(90deg);
+}
+
+#help ul {
+    line-height: 1.6em;
+    list-style-type: circle;
+}
+
+#help-container h1, h2 {
+    font-weight: 300;
+}
+
+li.bookmark-container {
+    border-radius: 2px;
+    border: 1px solid white;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px 2px;
+}
+
+li.bookmark-container:hover {
+    border: 1px solid #ABB2B9;
+}
+
+span.text-container-title {
+    font-weight: bold;
+    color: #222;
+}
+
+span.text-container-url {
+    color: #999;
+    word-break: break-all;
+}
+
+span#info {
+    font-weight: 100;
+}
+
+img.favicon-container-image {
+    width: 32px;
+    height: 32px;
+}
+
+.hidden {
+    display: none;
+}
+
+.discarded-tab {
+    opacity: 0.4;
+}
+
+.folder {
+    background-image: -webkit-image-set(url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvElEQVR4AaWRsY8NURTGf+fO3aeWtRGNiGILohAklkS2WL1SFKJQKtT+ANGotlUotVoiIYJCRKVRiJaIWOzb92buOZ83mRs72cIWfslvcu79cr9TjEnCVtcvnz538QYj3r999VAfnz9lHzJA//jm9avXAAQY8GDI9y2wE1du3V0+tLK+cenCMTP+8uzl688AhjEm1XMgvn759iKvLB9cu3fn9hoSA46lho3zZ490UUCiC2jlyIVHEC6wCfc3N9sM8H3rJ/LCQACJCNEXmMDDhoIQ3utBSgcQRi4LtrYLZh0JwEByXCJioVjoSIbqnQii9EWly+GKzkQqjpkhQFqIiACTKAFSIKgFoAQRKLtE6UDFwQyoBRJB3SjQaMYAOa5QDgU/ZoVJOKKmdQotjMAwQsMd9esJLMJykFI7n1HUjWLGW2sptV4ARJrjlixLkX+1hSa63X+ucZFwoKFigIJoGiQtZQl2ZtCoQyQCSAbhkBheCsiAqklQZEiQUaidT1mKKYGh3SUYQAIBwUDN8QwolGc70+0njx+9IUHi38SeoTH/bcdPnjn66cO7tj+PTHsUECO99/DqqYlJ4n/4A28FNzVErXrkAAAAAElFTkSuQmCC) 1x, url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABKElEQVR4Xs2XPUrEUBRGz5OMe4gi7mAYEN2DhbgAwcZCBe1dgMIswDYW7kEECxegzTALEEREa0snuZ+QoGGqpAh8HgIX3rvF4f7wSJKEk4wGzqa3u0AB5B0CH8DReLJ9P58908X1xWE/AVAxnuzkdJPPZ08FsAYargKScnrR5kqDCtCTNneI8UknVzcC2NxY53uxoA+roxGvb+8MQTq+LHR6sI8QzQeS2iiQEiLqGH9nWsoLtfmxdNeei98ISNw9PJJJ4uXzCweSGoEqwi0gr0BZGSsQtYBwEBKZQlQmAYV/CPG3QApKWwXiX1RAvgq0WxC+LYgQZQgH8beGlbMFGN8CmhZQRbhbIPNzLKdAMs5AEpkCIrCggLR3PhVGErCFEfvP6Qpe/AI/AeMfTKUCbnkAAAAASUVORK5CYII=) 2x);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position-y: 4px;
+    background-position-x: 2px;
+}
+
+.link {
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position-y: 4px;
+    background-position-x: 2px;
+}
+
+/**
+ * Drop-down menu for bookmarks
+ */
+
+#bookmarks-menu {
+    margin: 0 15px;
+}
+
+#bookmarks-menu li:hover {
+    background-color: #efefef;
+}
+
+#bookmarks-menu ul {
+    float: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#bookmarks-menu ul a {
+    color: #333;
+    display: block;
+    line-height: 2.0em;
+    padding: 0 5px 0 22px;
+    text-decoration: none;
+}
+
+#bookmarks-menu ul li {
+    position: relative;
+}
+
+#bookmarks-menu ul li:hover {
+    background-position-x: 2px;
+    background-position-y: 4px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    z-index: 999;
+}
+
+#bookmarks-menu ul li:hover>ul {
+    border-radius: 2px;
+    box-shadow: 1px 1px 2px 2px #ccc;
+    display: block;
+    margin: -1px;
+    padding: 3px;
+    z-index: 999;
+}
+
+#bookmarks-menu ul ul {
+    background: #fff;
+    display: none;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+}
+
+#bookmarks-menu ul ul li {
+    float: none;
+    min-height: 28px;
+    width: 200px;
+}
+
+#bookmarks-menu ul ul a {
+    background-position-x: 2px;
+    background-position-y: 4px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    line-height: 120%;
+    padding: 7px 5px 7px 25px;
+}
+
+#bookmarks-menu ul ul ul {
+    top: 0;
+    left: 100%;
+}

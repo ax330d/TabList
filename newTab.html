@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tab List</title>
+        <title>TabList</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="newTab.css" />
-        <script src="newTab.js"></script>
+        <link rel="stylesheet" href="css/newTab.css" />
+        <script src="js/newTab.js"></script>
     </head>
     <body>
         <div id="header">
-            TabList&nbsp;|&nbsp;<span id="info">you have <span id="number-of-tabs"></span> open tabs<span>
+            <div id="header-left">Tab<span id="thin">List</span></div>
+            <div id="header-right">
+                <span id="info">You have <span id="number-of-tabs"></span><span>
+            </div>
         </div>
         <div id="box">
+        </div>
+        <div id="footer">
+            <a href="" id="footer-help">Help</a>&nbsp;&#183;&nbsp;TabList v 1.0.5
+        </div>
+        <div id="help" class="hidden">
+            <div id="help-container">
+                <div id="help-close"><span id="close-sign">&#xD7;</span></div>
+                <h1>TabList Help</h1>
+                <p>TabList is an extension which helps you to view and manage your tabs.</p>
+                <p>
+                    <h2>What can it do?</h2>
+                    <ul>
+                        <li>of course, show list of all current tabs, also from other windows (you can switch this option in settings), but not private;</li>
+                        <li>follow all tabs activities — when tab opens, closes, moves or refreshes, it will track it and update list accordingly;</li>
+                        <li>show bookmarks bar (you can switch this option in settings). Also you can click on link to open it;</li>
+                        <li>open tab (focus on it) — click on favicon;</li>
+                        <li>close tab — click <span id="close-sign">&#xD7;</span>;</li>
+                        <li>reload tab — click <span id="reload-sign">&#x2B6E;</span>;</li>
+                        <li>discard tab (free memory) — click <span id="discard-sign">&#x2744;</span>.</li>
+                    </ul>
+                    Don't hesitate to report issues or ask features requests!
+                </p>
+            </div>
         </div>
     </body>
 </html>
