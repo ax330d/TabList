@@ -1,7 +1,43 @@
+/**
+ * TabList options CSS
+ */
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Roboto Thin'), local('Roboto-Thin'),
+      url(../fonts/Roboto-Thin.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+      url(../fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+      url(../fonts/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+      url(../fonts/Roboto-Bold.ttf) format('truetype');
+}
 
 body {
     background-color: whitesmoke;
     font-size: 1.0em;
+    font-family: Roboto;
 }
 
 div#box {
@@ -10,12 +46,9 @@ div#box {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .05), 0 1px 4px 0 rgba(0, 0, 0, .08), 0 3px 1px -2px rgba(0, 0, 0, .2);
     height: auto;
     margin: auto;
-    padding: 15px 15px 30px 15px;
+    padding: 10px 25px 25px 25px;
     width: 40%;
-}
-
-div#status {
-    padding: 5px;
+    margin-top: 20px;
 }
 
 label {
@@ -23,5 +56,5 @@ label {
 }
 
 h2 {
-    font-weight: 300;
+    font-weight: 400;
 }

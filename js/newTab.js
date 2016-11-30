@@ -1,11 +1,21 @@
 /**
  * @fileOverview TabList extension main file.
  * @author Arthur (ax330d) Gerkis
- * @version 1.0.5
+ * @version 1.0.7
  */
 
 // jshint esversion:6
 
+// TODO: (ongoing) cleanup JS, see chrome://resources/js/cr.js, see google javascript code guidelines
+// TODO: (ongoing) cleanup CSS
+// TODO: (ongoing) check for errors and bugs
+
+// FIXME: track when some window is closed (title remains in list)
+// FIXME: get favicons from cache?
+
+// TODO: (future) add tab to bookmark
+// TODO: (future) close tab (but save in list!) and recover tab
+// TODO: (future) create option "Go to" (go to new tab)
 // TODO: (future) show "Other bookmarks"
 // TODO: (future) add context menus to bookmarks
 // TODO: (future) add localisation (ru, en)?
@@ -15,13 +25,18 @@
 // TODO: (future) drag n drop (tabs reordering)
 // TODO: (future) move storage from sync to local? Make option to choose?
 // TODO: (future) show screenshots? (https://louisrli.github.io/blog/2013/01/16/javascript-canvas-screenshot/)
-// TODO: (ongoing) cleanup JS, see chrome://resources/js/cr.js, see google javascript code guidelines
-// TODO: (ongoing) cleanup CSS
-// TODO: (ongoing) check for errors and bugs
+// TODO: (future) quick tab view -- open tab and then return to page?
+// TODO: (future) mark if tab is audible
+// TODO: (future) make popup when some page updates (https://developer.chrome.com/extensions/notifications ?). Add to options
 
 
 var tl = tl || function() {
   'use strict';
+
+  /**
+   * Version of extension.
+   */
+  let extensionVersion = '1.0.7';
 
   /**
    * Tabs counter. Starts from 1 because we aleardy have opened one tab.
@@ -78,6 +93,8 @@ var tl = tl || function() {
 
     // If we are discarding some tab, then it will get new id, replace id.
     if (isCurrentlyDiscarding) {
+      listOfTabsIds.splice(listOfTabsIds.indexOf(previousTabId), 1);
+      listOfTabsIds.push(tab.id);
       let dataContainer = document.querySelector('[data-tab-id="' + previousTabId + '"]');
       if (dataContainer) {
         dataContainer.setAttribute('data-tab-id', tab.id);
@@ -222,6 +239,14 @@ var tl = tl || function() {
       let textContainer = dataContainer.appendChild(document.createElement('div'));
       textContainer.classList.add('text-container');
 
+      if (tab.url.indexOf('https://') === 0) {
+        let textContainerLock = textContainer.appendChild(document.createElement('span'));
+        textContainerLock.innerText = 'lock';
+        textContainerLock.classList.add('text-container-lock');
+        textContainerLock.classList.add('material-icons');
+        textContainerLock.title = 'This site uses HTTPS protocol for secure communication.';
+      }
+
       let textContainerTitle = textContainer.appendChild(document.createElement('span'));
       textContainerTitle.classList.add('text-container-title');
       textContainerTitle.innerText = tab.title;
@@ -238,31 +263,34 @@ var tl = tl || function() {
       let optionsContainer = dataContainer.appendChild(document.createElement('div'));
       optionsContainer.classList.add('options-container');
 
-      // Closes tab
-      let optionsContainerCross = optionsContainer.appendChild(document.createElement('div'));
-      optionsContainerCross.innerText = unescape('%u00d7');
-      optionsContainerCross.classList.add('options-container-cross');
-      optionsContainerCross.title = 'Close tab';
-      optionsContainerCross.onclick = function(event) {
-        _removeTab(_getTabId(this), true);
-      };
-
       // Reload tab
-      let optionsContainerReload = optionsContainer.appendChild(document.createElement('div'));
-      optionsContainerReload.innerText = unescape('%u2B6E');
+      let optionsContainerReload = optionsContainer.appendChild(document.createElement('span'));
+      optionsContainerReload.innerText = 'refresh';
       optionsContainerReload.classList.add('options-container-reload');
+      optionsContainerReload.classList.add('material-icons');
       optionsContainerReload.title = 'Reload tab';
       optionsContainerReload.onclick = function(event) {
         _reloadTab(_getTabId(this));
       };
 
       // Discard tab memory
-      let optionsContainerDiscard = optionsContainer.appendChild(document.createElement('div'));
-      optionsContainerDiscard.innerText = unescape('%u2744');
+      let optionsContainerDiscard = optionsContainer.appendChild(document.createElement('span'));
+      optionsContainerDiscard.innerText = 'memory';
       optionsContainerDiscard.classList.add('options-container-discard');
+      optionsContainerDiscard.classList.add('material-icons');
       optionsContainerDiscard.title = 'Discard tab';
       optionsContainerDiscard.onclick = function(event) {
         _discardTab(_getTabId(this));
+      };
+
+      // Closes tab
+      let optionsContainerCross = optionsContainer.appendChild(document.createElement('span'));
+      optionsContainerCross.innerText = 'close';
+      optionsContainerCross.classList.add('options-container-cross');
+      optionsContainerCross.classList.add('material-icons');
+      optionsContainerCross.title = 'Close tab';
+      optionsContainerCross.onclick = function(event) {
+        _removeTab(_getTabId(this), true);
       };
     }
   }
@@ -439,23 +467,25 @@ var tl = tl || function() {
       });
 
       let box = document.getElementById('box');
+      let firstWindow = true;
 
       Object.keys(windowsArray).forEach(function(windowId) {
 
         if (doShowAllWindows) {
           let separator = box.appendChild(document.createElement('div'));
           separator.classList.add('separator');
+          if (!firstWindow) {
+            separator.classList.add('separator-cut');
+          }
+          if (firstWindow) {
+            firstWindow = false;
+          }
           separator.innerText = 'Window (ID ' + windowId + ')';
         }
 
         let tabs = windowsArray[windowId];
         tabs.forEach(function(tab) {
-          try {
-            _addTab(tab, box);
-          } catch (e) {
-            // Should never happen
-            console.error(e);
-          }
+          _addTab(tab, box);
         });
       });
     });
@@ -475,12 +505,20 @@ var tl = tl || function() {
     currentWindowId = null;
     listOfTabsIds = [];
 
+    document.getElementById('footer-version').innerText = 'TabList v ' + extensionVersion;
+    document.getElementById('footer-about').onclick = function(event) {
+      event.preventDefault();
+      document.getElementById('about').classList.remove('hidden');
+    };
     document.getElementById('footer-help').onclick = function(event) {
       event.preventDefault();
       document.getElementById('help').classList.remove('hidden');
     };
     document.querySelector('#help-close').onclick = function(event) {
       document.getElementById('help').classList.add('hidden');
+    };
+    document.querySelector('#about-close').onclick = function(event) {
+      document.getElementById('about').classList.add('hidden');
     };
 
     _updateCurrentWindowId();

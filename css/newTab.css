@@ -1,15 +1,71 @@
 /**
- * TabList CSS
+ * TabList main CSS
  */
 
 @font-face {
-    font-family: 'Symbola';
-    src: url("../fonts/Symbola.woff") format('woff');
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 100;
+    src: local('Roboto Thin'), local('Roboto-Thin'),
+      url(../fonts/Roboto-Thin.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'),
+      url(../fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+      url(../fonts/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'),
+      url(../fonts/Roboto-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  /*font-size: 24px; */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
 }
 
 body {
     background-color: whitesmoke;
     margin: 0px;
+    font-family: Roboto;
 }
 
 #footer a {
@@ -20,64 +76,56 @@ div.data-container {
     background-color: #fefefe;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .05), 0 1px 4px 0 rgba(0, 0, 0, .08), 0 3px 1px -2px rgba(0, 0, 0, .2);
     margin: 20px;
-    padding: 10px;
     word-wrap: break-word;
     display: flex;
 }
 
 div.favicon-container {
     cursor: pointer;
-    padding: 5px;
+    padding: 15px;
 }
 
 div.text-container {
     font-size: 1.1em;
     line-height: 1.4em;
     width: 100%;
-    padding: 5px;
+    padding: 15px 15px 15px 0px;
 }
 
 div.options-container {
-    width: 24px;
+    padding: 15px 0px 15px 15px;
+    font-size: 2.2em;
+    vertical-align: middle;
     text-align: center;
-    position: relative;
+    display: none;
+    width: 140px;
+}
+
+div.data-container:hover > div.options-container {
+    display: flex;
+    background-color: #ddd;
+    align-items: center;
+}
+
+div.separator-cut {
+    border-top: 2px dashed #ccc;    
 }
 
 div.separator {
-    padding: 15px;
-    margin: 25px;
-    font-size: 1.4em;
-}
-
-div.options-container-cross {
-    font-size: 2.0em;
-    color: #999;
-    cursor: pointer;
-    top: -10px;
-    position: relative;
-    width: 24px;
-}
-
-div.options-container-reload {
+    padding: 25px 25px 10px 25px;
     font-size: 1.6em;
-    color: #999;
-    cursor: pointer;
-    font-family: Symbola;
-    transform: rotate(90deg);
-    position: absolute;
-    bottom: -4px;
-    width: 24px;
 }
 
-div.options-container-discard {
-    position: absolute;
-    top: -5px;
-    font-size: 1.6em;
-    color: #999;
-    font-weight: bold;
-    width: 24px;
-    right: 24px;
+.options-container span {
     cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    padding: 4px;
+    color: #666;
+}
+
+.options-container span:hover {
+    color: #444;
 }
 
 div#footer {
@@ -88,7 +136,7 @@ div#footer {
     text-align: center;
 }
 
-div#help {
+div#help, div#about {
     position: fixed;
     top: 0;
     left: 0;
@@ -98,24 +146,26 @@ div#help {
     background-color: rgba(0,0,0,0.7);
 }
 
-div#help-container {
+div#help-container, div#about-container {
     background-color: white;
     position: fixed;
-    width: 500px;
+    width: 600px;
     top: 30%;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -300px;
     margin-top: -100px;
     padding: 20px;
     border-radius: 3px;
     font-size: 1.2em;
 }
 
-div#help-close {
+div#help-close, div#about-close {
     float: right;
-    top: -10px;
+    top: -15px;
+    right: -10px;
     position: relative;
     cursor: pointer;
+    font-size: 1.4em;
 }
 
 div#bookmarks-container {
@@ -129,14 +179,12 @@ div#header {
     background-color: steelblue;
     color: white;
     display: flex;
-    font-weight: 300;
     font-size: 1.5em;
     padding: 15px;
     margin: 0px;
 }
 
 div#header-left {
-    font-weight: 300;
     width: 80%;
 }
 
@@ -150,21 +198,9 @@ span#thin {
     font-weight: 100;
 }
 
-span#discard-sign {
-    font-size: 1.2em;
+span#discard-sign, span#close-sign, span#reload-sign {
     color: #999;
-}
-
-span#close-sign {
-    font-size: 1.4em;
-    color: #999;
-}
-
-span#reload-sign {
-    font-size: 1.1em;
-    color: #999;
-    font-family: Symbola;
-    transform: rotate(90deg);
+    vertical-align: middle;
 }
 
 #help ul {
@@ -172,8 +208,8 @@ span#reload-sign {
     list-style-type: circle;
 }
 
-#help-container h1, h2 {
-    font-weight: 300;
+#help-container h1, h2, #about-container h1, h2 {
+    font-weight: 400;
 }
 
 li.bookmark-container {
@@ -196,6 +232,13 @@ span.text-container-title {
 span.text-container-url {
     color: #999;
     word-break: break-all;
+}
+
+span.text-container-lock {
+    font-size: 1.2em;
+    color: forestgreen;
+    padding: 0 5px 0 0;
+    vertical-align: text-top;
 }
 
 span#info {

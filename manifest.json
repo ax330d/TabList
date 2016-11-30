@@ -1,6 +1,6 @@
 {
   "name": "TabList",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This extension will list all opened tabs in new tab. Useful if you have opened like hundred of tabs.",
   "chrome_url_overrides" : {
     "newtab": "newTab.html"
